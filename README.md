@@ -79,6 +79,14 @@ warp_prep_output/
 └── prepare_warp_summary.csv     # Processing summary
 ```
 
+## Downstream Warp commands
+
+The [Warp command guide](WARP_COMMANDS.md) explains settings creation, projection
+export, tilt-series import, stack creation, IMOD alignment import, full and
+odd/even reconstruction, and optional Noise2Map denoising. It uses generic paths
+and named parameter placeholders, with no dataset-specific numerical values or
+Slurm resource directives.
+
 ## Command-line use
 
 ```bash

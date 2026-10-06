@@ -87,3 +87,9 @@ Scroll in the configuration panel if this section is outside the visible area.*
 
 Verify that the angle count and ordering match the projection stack that will be
 used with the `.tlt` file.
+
+## Continue with Warp
+
+After checking the prepared output, follow the [generic Warp command guide](WARP_COMMANDS.md)
+for import, alignment transfer, reconstruction and optional Noise2Map denoising.
+Fill in the paths and dataset-specific parameters before running the templates.
