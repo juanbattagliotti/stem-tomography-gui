@@ -1,78 +1,89 @@
-# Warp Tilt-Series Preparation GUI
+# Illustrated GUI guide
 
-This folder now includes a small desktop GUI for the automated Warp-preparation
-workflow.
+The Warp Tilt-Series Preparation GUI prepares images and metadata for downstream
+processing. It runs [prepare_warp_tiltseries.py](prepare_warp_tiltseries.py) and
+provides a separate [MDOC-to-TLT utility](mdoc_to_tlt.py). Reconstruction and
+restoration are performed separately.
 
-## What It Does
+## 1. Install and open the GUI
 
-The GUI runs [prepare_warp_tiltseries.py](prepare_warp_tiltseries.py) behind the scenes. It lets a user:
-
-- browse for input/output folders
-- choose the tilt-to-slice mapping mode
-- set image conversion options
-- preview the exact command before running it
-- save and reload presets as JSON
-- extract a `.tlt` angle file directly from an `.mdoc`
-
-This is meant to replace the manual notebook-based preparation path for normal
-use.
-
-## Files
-
-- [tiltseries_protocol_gui.py](tiltseries_protocol_gui.py): desktop GUI
-- [prepare_warp_tiltseries.py](prepare_warp_tiltseries.py): conversion engine
-- [mdoc_to_tlt.py](mdoc_to_tlt.py): MDOC to TLT helper
-- [environment_prepare_warp.yml](environment_prepare_warp.yml): conda environment
-
-## Setup
-
-Create the conda environment if needed:
+From the repository directory:
 
 ```bash
 conda env create -f environment_prepare_warp.yml
 conda activate warp-tilt-prep-new
+python tiltseries_protocol_gui.py
 ```
 
-## Launch
+The GUI requires Tkinter and a graphical desktop. See the
+[main README](README.md) for requirements and command-line alternatives.
 
-From this folder:
+## 2. Set the inputs and output
 
-```bash
-python3 tiltseries_protocol_gui.py
-```
+![Main GUI showing configuration panels on the left and actions, presets and the run log on the right](gui-overview.png)
 
-If your system Python does not include Tkinter, launch it from a Python
-installation that does.
+*Main window before selecting a dataset. Paths and settings shown are illustrative;
+use your own environment, data paths and acquisition ordering.*
 
-## Typical Use
+1. Under **Runtime**, choose the Python executable in the installed environment
+   and confirm that **Script** points to `prepare_warp_tiltseries.py`.
+2. Under **Inputs**, choose **One input folder**, **Separate MRC and MDOC folders**
+   or **Pairs CSV**, then fill in the corresponding paths.
+3. Under **Output**, select a directory separate from the original data. The
+   example preset uses `frames` and `mdoc` for the output subdirectories, `frames`
+   for **SubFramePath prefix**, and `_warp` for **Output MDOC suffix**.
+4. Under **Mapping**, select the **Slice order** matching the actual stack. Check
+   the preview against the metadata; `tilt-ascending` is not correct for every
+   dataset. **Preview count** controls how many assignments are displayed.
+5. Under **Image Conversion**, select the required output dtype and compression.
+   The example uses `preserve` and `none`.
+6. Under **Flags**, enable **Dry run only** for the first pass and leave
+   **Overwrite existing output** off unless replacement is intended.
 
-1. Set the Python path you want to use.
-2. Check that the script path points to `prepare_warp_tiltseries.py`.
-3. Choose one of the three input modes:
-   - one input folder
-   - separate MRC and MDOC folders
-   - pairs CSV
-4. Pick the output folder.
-5. Set `Slice order` to match the actual image stack and verify the dry-run mapping.
-6. Click `Preview Command`.
-7. Click `Run`.
+Use **Extra CLI Arguments** only for options you understand and need beyond the
+visible fields. The [script reference](README_prepare_warp_tiltseries.md) explains
+additional options.
 
-## MDOC To TLT
+## 3. Preview, save settings and run
 
-The GUI also includes an `MDOC To TLT Utility` section.
+![Actions and presets panel with Preview Command, Run, Stop, Write TLT, Save Preset and Load Preset controls above the Run Log](gui-actions-and-log.png)
 
-Typical use:
+*The message “Cannot build command yet: Input folder cannot be empty” appears
+because the input folder has not been selected. Select an input folder, or finish
+the fields for the other input mode, before previewing again. This image shows
+the initial state, not a successful processing run.*
 
-1. Choose the input `.mdoc`.
-2. Choose the output `.tlt`.
-3. Leave `Angle order = block` if you want the `.tlt` to follow the MDOC block order.
-4. Click `Write TLT`.
+1. Click **Preview Command** to inspect the command assembled from your settings.
+2. With **Dry run only** enabled, click **Run** and inspect the **Run Log** for
+   image-to-angle assignments. Previewing the command alone does not execute
+   the mapping checks.
+3. When paths and mapping are correct, disable **Dry run only** and click **Run**
+   again to write the prepared files. Follow progress and any errors in the
+   **Run Log**. **Stop** requests termination of the running process; inspect
+   the output directory before restarting an interrupted conversion.
+4. Use **Save Preset** to retain settings and **Load Preset** to restore them.
+   Recheck paths and mapping when using a preset with another dataset.
 
-If you want the output sorted by angle, use `tilt-ascending` or `tilt-descending`.
+The supplied `example_preset_tilt_ascending.json` begins in dry-run mode.
+After conversion, inspect `frames/`, `mdoc/` and `prepare_warp_summary.csv` before
+continuing with the downstream workflow.
 
-## Notes
+## 4. Export a tilt-angle list
 
-- `Dry run` prints the planned mappings without writing files.
-- `Overwrite existing output` is off by default.
-- `Extra CLI Arguments` is there for advanced cases that are not yet exposed by
-  the form.
+![MDOC To TLT Utility showing script, input MDOC, output TLT, angle order, decimal precision and overwrite controls](gui-mdoc-to-tlt.png)
+
+*The MDOC-to-TLT utility extracts angles independently of image conversion.
+Scroll in the configuration panel if this section is outside the visible area.*
+
+1. Confirm **TLT script** points to `mdoc_to_tlt.py`.
+2. Select **Input MDOC** and choose a path for **Output TLT**.
+3. Set **Angle order** to match the projection ordering expected downstream.
+   `block` follows the order of records in the MDOC. Sorting an angle list does
+   not reorder the image stack.
+4. Set **Decimals** as needed. **Strip trailing zeros** changes numeric formatting;
+   it does not change the ordering.
+5. Leave **Overwrite existing TLT** off unless replacement is intended, then
+   click **Write TLT** in the Actions panel.
+
+Verify that the angle count and ordering match the projection stack that will be
+used with the `.tlt` file.

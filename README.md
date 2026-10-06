@@ -37,6 +37,14 @@ The environment specifies dependencies, not a fully pinned reproducibility lock.
 
 ## Prepare a dataset
 
+![Warp Tilt-Series Preparation GUI showing configuration panels, actions and logs](gui-overview.png)
+
+Configure input and output paths on the left, then preview and run preparation
+on the right. See the [illustrated GUI guide](README_GUI.md) for the preview
+controls, presets and MDOC-to-TLT utility. The screenshot shows the interface
+before an input folder has been selected. Its paths and options are examples,
+not dataset-specific recommendations.
+
 1. Select an input folder containing matching MRC and MDOC files, separate image
    and metadata folders, or an explicit pairs CSV.
 2. Choose an output directory separate from the raw input directory.
