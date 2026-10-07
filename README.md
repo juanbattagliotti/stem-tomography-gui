@@ -84,7 +84,7 @@ Slurm resource directives.
 ## Command-line use
 
 ```bash
-uv run python -m stem_tomography_gui.prepare_warp_tiltseries \
+uv run prepare-warp-tiltseries \
   --input /path/to/raw \
   --output /path/to/warp_prep_output \
   --slice-order tilt-ascending \
@@ -97,7 +97,7 @@ option list, including explicit file pairing and image conversion settings.
 To extract a tilt-angle list in MDOC block order:
 
 ```bash
-uv run python -m stem_tomography_gui.mdoc_to_tlt \
+uv run mdoc-to-tlt \
   --mdoc /path/to/series.mdoc \
   --output /path/to/angles.tlt \
   --order block

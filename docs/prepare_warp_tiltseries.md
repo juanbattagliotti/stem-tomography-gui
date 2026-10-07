@@ -37,7 +37,7 @@ included.
 ## Command-Line Use
 
 ```bash
-uv run python -m stem_tomography_gui.prepare_warp_tiltseries \
+uv run prepare-warp-tiltseries \
   --input /path/to/folder_with_mrc_and_mdoc \
   --output /path/to/Warp_prep \
   --recursive \
@@ -47,7 +47,7 @@ uv run python -m stem_tomography_gui.prepare_warp_tiltseries \
 If the preview looks correct, run without `--dry-run`:
 
 ```bash
-uv run python -m stem_tomography_gui.prepare_warp_tiltseries \
+uv run prepare-warp-tiltseries \
   --input /path/to/folder_with_mrc_and_mdoc \
   --output /path/to/Warp_prep \
   --recursive
@@ -94,7 +94,7 @@ mrc,mdoc,name
 Then run:
 
 ```bash
-uv run python -m stem_tomography_gui.prepare_warp_tiltseries \
+uv run prepare-warp-tiltseries \
   --pairs-csv pairs.csv \
   --output /path/to/Warp_prep \
   --dry-run

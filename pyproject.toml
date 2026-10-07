@@ -14,6 +14,8 @@ dependencies = [
 
 [project.scripts]
 stem-tomography-gui = "stem_tomography_gui.tiltseries_protocol_gui:main"
+prepare-warp-tiltseries = "stem_tomography_gui.prepare_warp_tiltseries:main"
+mdoc-to-tlt = "stem_tomography_gui.mdoc_to_tlt:main"
 
 [build-system]
 requires = ["uv_build>=0.12.20,<0.13.0"]
