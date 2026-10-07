@@ -18,7 +18,7 @@ protocol; it is not a claim that the commands have been executed on your dataset
 
 ## Before starting
 
-Use the [illustrated GUI guide](README_GUI.md) to prepare one TIFF per tilt and
+Use the [illustrated GUI guide](GUI.md) to prepare one TIFF per tilt and
 its rewritten MDOC. Confirm the image-to-angle mapping before importing the data.
 The directory name `frames` follows Warp terminology; here it contains individual
 STEM projections, not dose-fractionated movie frames. Make sure MDOC

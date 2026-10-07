@@ -1,0 +1,22 @@
+[project]
+name = "stem-tomography-gui"
+version = "0.1.0"
+description = "A desktop interface for preparing MRC tilt-series stacks and MDOC acquisition metadata for a Warp-based STEM tomography workflow."
+readme = "README.md"
+authors = [
+    { name = "Juan Battagliotti", email = "168439253+juanbattagliotti@users.noreply.github.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.5.3",
+    "pillow>=12.3.0",
+]
+
+[project.scripts]
+stem-tomography-gui = "stem_tomography_gui.tiltseries_protocol_gui:main"
+prepare-warp-tiltseries = "stem_tomography_gui.prepare_warp_tiltseries:main"
+mdoc-to-tlt = "stem_tomography_gui.mdoc_to_tlt:main"
+
+[build-system]
+requires = ["uv_build>=0.12.20,<0.13.0"]
+build-backend = "uv_build"

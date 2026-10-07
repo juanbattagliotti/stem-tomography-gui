@@ -21,7 +21,6 @@ from dataclasses import dataclass
 from pathlib import Path
 import re
 import struct
-import sys
 from typing import Iterable
 
 import numpy as np
