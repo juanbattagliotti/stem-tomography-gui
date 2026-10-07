@@ -31,10 +31,10 @@ uv run stem-tomography-gui
 
 ## Prepare a dataset
 
-![Warp Tilt-Series Preparation GUI showing configuration panels, actions and logs](gui-overview.png)
+![Warp Tilt-Series Preparation GUI showing configuration panels, actions and logs](assets/gui-overview.png)
 
 Configure input and output paths on the left, then preview and run preparation
-on the right. See the [illustrated GUI guide](README_GUI.md) for the preview
+on the right. See the [illustrated GUI guide](docs/GUI.md) for the preview
 controls, presets and MDOC-to-TLT utility. The screenshot shows the interface
 before an input folder has been selected. Its paths and options are examples,
 not dataset-specific recommendations.
@@ -75,7 +75,7 @@ warp_prep_output/
 
 ## Downstream Warp commands
 
-The [Warp command guide](WARP_COMMANDS.md) explains settings creation, projection
+The [Warp command guide](docs/warp_commands.md.md) explains settings creation, projection
 export, tilt-series import, stack creation, IMOD alignment import, full and
 odd/even reconstruction, and optional Noise2Map denoising. It uses generic paths
 and named parameter placeholders, with no dataset-specific numerical values or
@@ -84,7 +84,7 @@ Slurm resource directives.
 ## Command-line use
 
 ```bash
-python prepare_warp_tiltseries.py \
+uv run python prepare_warp_tiltseries.py \
   --input /path/to/raw \
   --output /path/to/warp_prep_output \
   --slice-order tilt-ascending \
@@ -97,7 +97,7 @@ option list, including explicit file pairing and image conversion settings.
 To extract a tilt-angle list in MDOC block order:
 
 ```bash
-python mdoc_to_tlt.py \
+uv run python mdoc_to_tlt.py \
   --mdoc /path/to/series.mdoc \
   --output /path/to/angles.tlt \
   --order block
@@ -108,27 +108,14 @@ Sorting angles alone does not reorder an image stack.
 
 ## Documentation
 
-- [GUI guide](README_GUI.md)
-- [Preparation script reference](README_prepare_warp_tiltseries.md)
-- [Quick start](START_HERE.md)
-- [Source provenance and packaging changes](PACKAGING_CHANGES.md)
-- [Validation scope](VALIDATION.md)
+- [GUI guide](docs/GUI.md)
+- [Preparation script reference](docs/prepare_warp_tiltseries.md)
+- [Warp commands](docs/warp_commands.md)
 
-## Software checks
+## Set-up test
 
-In the activated environment, run:
+To run a dummy pipeline test, do:
 
 ```bash
-python tests/test_preparation.py
+uv run python tests/test_preparation.py
 ```
-
-This synthetic check covers all four slice-order modes, float32 pixel preservation,
-metadata paths, angle extraction, dry-run behavior and overwrite refusal. It does
-not establish scientific restoration accuracy or exercise the interactive GUI.
-
-## License and citation
-
-No software license was supplied with the original bundle, and no license has
-been assigned in this repository. The code is not currently offered under an
-open-source license. A manuscript citation and archival release DOI can be added
-when available.
