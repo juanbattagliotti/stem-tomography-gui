@@ -3,30 +3,24 @@
 This is the shareable GUI bundle for preparing Warp tilt-series inputs from
 MRC/MDOC data.
 
-## Files In This Bundle
+## Project Layout
 
-- `tiltseries_protocol_gui.py`: the desktop GUI
-- `prepare_warp_tiltseries.py`: the conversion engine
-- `mdoc_to_tlt.py`: extracts tilt angles from MDOC into a `.tlt` file
-- `environment_prepare_warp.yml`: conda environment
-- `launch_gui.sh`: convenience launcher
-- `example_preset_tilt_ascending.json`: example preset
-- `README_GUI.md`: GUI guide
-- `README_prepare_warp_tiltseries.md`: script reference
+- `src/stem_tomography_gui/`: the desktop GUI and command-line utilities
+- `examples/example_preset_tilt_ascending.json`: example GUI preset
+- `docs/GUI.md`: illustrated GUI guide
+- `docs/prepare_warp_tiltseries.md`: preparation-engine reference
+- `docs/warp_commands.md`: downstream Warp command templates
+- `tests/test_preparation.py`: synthetic end-to-end pipeline check
 
 ## Fastest Setup
 
 ```bash
-conda env create -f environment_prepare_warp.yml
-conda activate warp-tilt-prep-new
-python3 tiltseries_protocol_gui.py
+uv run stem-tomography-gui
 ```
 
-Or:
-
-```bash
-bash launch_gui.sh
-```
+`uv` creates the project environment and installs its dependencies
+automatically. See the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/)
+if the `uv` command is not yet available.
 
 ## Example Settings
 

@@ -1,32 +1,31 @@
 # Illustrated GUI guide
 
 The Warp Tilt-Series Preparation GUI prepares images and metadata for downstream
-processing. It runs [prepare_warp_tiltseries.py](prepare_warp_tiltseries.py) and
-provides a separate [MDOC-to-TLT utility](mdoc_to_tlt.py). Reconstruction and
-restoration are performed separately.
+processing. It runs the preparation engine and provides a separate MDOC-to-TLT
+utility. Reconstruction and restoration are performed separately.
 
 ## 1. Install and open the GUI
 
 From the repository directory:
 
 ```bash
-conda env create -f environment_prepare_warp.yml
-conda activate warp-tilt-prep-new
-python tiltseries_protocol_gui.py
+uv run stem-tomography-gui
 ```
 
-The GUI requires Tkinter and a graphical desktop. See the
-[main README](README.md) for requirements and command-line alternatives.
+`uv` creates and manages the project environment automatically. The GUI requires
+Tkinter and a graphical desktop. See the [main README](../README.md) for the uv
+installation link and command-line alternatives.
 
 ## 2. Set the inputs and output
 
-![Main GUI showing configuration panels on the left and actions, presets and the run log on the right](gui-overview.png)
+![Main GUI showing configuration panels on the left and actions, presets and the run log on the right](../assets/gui-overview.png)
 
 *Main window before selecting a dataset. Paths and settings shown are illustrative;
 use your own environment, data paths and acquisition ordering.*
 
-1. Under **Runtime**, choose the Python executable in the installed environment
-   and confirm that **Script** points to `prepare_warp_tiltseries.py`.
+1. The **Runtime** fields are populated from the uv-managed environment and the
+   installed package. Change them only when intentionally running another copy
+   of the preparation engine.
 2. Under **Inputs**, choose **One input folder**, **Separate MRC and MDOC folders**
    or **Pairs CSV**, then fill in the corresponding paths.
 3. Under **Output**, select a directory separate from the original data. The
@@ -41,12 +40,12 @@ use your own environment, data paths and acquisition ordering.*
    **Overwrite existing output** off unless replacement is intended.
 
 Use **Extra CLI Arguments** only for options you understand and need beyond the
-visible fields. The [script reference](README_prepare_warp_tiltseries.md) explains
+visible fields. The [script reference](prepare_warp_tiltseries.md) explains
 additional options.
 
 ## 3. Preview, save settings and run
 
-![Actions and presets panel with Preview Command, Run, Stop, Write TLT, Save Preset and Load Preset controls above the Run Log](gui-actions-and-log.png)
+![Actions and presets panel with Preview Command, Run, Stop, Write TLT, Save Preset and Load Preset controls above the Run Log](../assets/gui-actions-and-log.png)
 
 *The message “Cannot build command yet: Input folder cannot be empty” appears
 because the input folder has not been selected. Select an input folder, or finish
@@ -70,12 +69,13 @@ continuing with the downstream workflow.
 
 ## 4. Export a tilt-angle list
 
-![MDOC To TLT Utility showing script, input MDOC, output TLT, angle order, decimal precision and overwrite controls](gui-mdoc-to-tlt.png)
+![MDOC To TLT Utility showing script, input MDOC, output TLT, angle order, decimal precision and overwrite controls](../assets/gui-mdoc-to-tlt.png)
 
 *The MDOC-to-TLT utility extracts angles independently of image conversion.
 Scroll in the configuration panel if this section is outside the visible area.*
 
-1. Confirm **TLT script** points to `mdoc_to_tlt.py`.
+1. Leave **TLT script** at its package-provided default unless intentionally
+   running another copy of the utility.
 2. Select **Input MDOC** and choose a path for **Output TLT**.
 3. Set **Angle order** to match the projection ordering expected downstream.
    `block` follows the order of records in the MDOC. Sorting an angle list does
@@ -90,6 +90,6 @@ used with the `.tlt` file.
 
 ## Continue with Warp
 
-After checking the prepared output, follow the [generic Warp command guide](WARP_COMMANDS.md)
+After checking the prepared output, follow the [generic Warp command guide](./warp_commands.md)
 for import, alignment transfer, reconstruction and optional Noise2Map denoising.
 Fill in the paths and dataset-specific parameters before running the templates.

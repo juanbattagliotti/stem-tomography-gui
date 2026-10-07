@@ -19,7 +19,7 @@ Clone this repository:
 
 ```bash
 git clone https://github.com/nobias-fht/stem-tomography-gui.git
-mdkir stem-tomography-gui
+cd stem-tomography-gui
 ```
 
 Run the interface with `uv` (see [uv installation guidelines](https://docs.astral.sh/uv/getting-started/installation/)):
@@ -75,7 +75,7 @@ warp_prep_output/
 
 ## Downstream Warp commands
 
-The [Warp command guide](docs/warp_commands.md.md) explains settings creation, projection
+The [Warp command guide](docs/warp_commands.md) explains settings creation, projection
 export, tilt-series import, stack creation, IMOD alignment import, full and
 odd/even reconstruction, and optional Noise2Map denoising. It uses generic paths
 and named parameter placeholders, with no dataset-specific numerical values or
@@ -84,7 +84,7 @@ Slurm resource directives.
 ## Command-line use
 
 ```bash
-uv run python prepare_warp_tiltseries.py \
+uv run python -m stem_tomography_gui.prepare_warp_tiltseries \
   --input /path/to/raw \
   --output /path/to/warp_prep_output \
   --slice-order tilt-ascending \
@@ -97,7 +97,7 @@ option list, including explicit file pairing and image conversion settings.
 To extract a tilt-angle list in MDOC block order:
 
 ```bash
-uv run python mdoc_to_tlt.py \
+uv run python -m stem_tomography_gui.mdoc_to_tlt \
   --mdoc /path/to/series.mdoc \
   --output /path/to/angles.tlt \
   --order block

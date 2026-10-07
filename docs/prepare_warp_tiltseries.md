@@ -22,20 +22,22 @@ Warp_prep/
 
 ## Quick Start
 
-Use Python 3.11 with NumPy and Pillow, or create the supplied Conda environment:
+Install `uv` using its
+[installation guide](https://docs.astral.sh/uv/getting-started/installation/),
+then run commands from the repository root. `uv` installs the required Python
+version and project dependencies into its managed environment.
 
 ```bash
-conda env create -f environment_prepare_warp.yml
-conda activate warp-tilt-prep-new
+uv sync
 ```
 
 This repository contains the GUI and command-line scripts. A notebook is not
 included.
 
-## Command-Line Setup
+## Command-Line Use
 
 ```bash
-python3 prepare_warp_tiltseries.py \
+uv run python -m stem_tomography_gui.prepare_warp_tiltseries \
   --input /path/to/folder_with_mrc_and_mdoc \
   --output /path/to/Warp_prep \
   --recursive \
@@ -45,7 +47,7 @@ python3 prepare_warp_tiltseries.py \
 If the preview looks correct, run without `--dry-run`:
 
 ```bash
-python3 prepare_warp_tiltseries.py \
+uv run python -m stem_tomography_gui.prepare_warp_tiltseries \
   --input /path/to/folder_with_mrc_and_mdoc \
   --output /path/to/Warp_prep \
   --recursive
@@ -92,7 +94,7 @@ mrc,mdoc,name
 Then run:
 
 ```bash
-python3 prepare_warp_tiltseries.py \
+uv run python -m stem_tomography_gui.prepare_warp_tiltseries \
   --pairs-csv pairs.csv \
   --output /path/to/Warp_prep \
   --dry-run
