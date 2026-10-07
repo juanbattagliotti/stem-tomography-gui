@@ -63,7 +63,6 @@ the initial state, not a successful processing run.*
 4. Use **Save Preset** to retain settings and **Load Preset** to restore them.
    Recheck paths and mapping when using a preset with another dataset.
 
-The supplied `example_preset_tilt_ascending.json` begins in dry-run mode.
 After conversion, inspect `frames/`, `mdoc/` and `prepare_warp_summary.csv` before
 continuing with the downstream workflow.
 

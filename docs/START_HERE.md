@@ -6,7 +6,6 @@ MRC/MDOC data.
 ## Project Layout
 
 - `src/stem_tomography_gui/`: the desktop GUI and command-line utilities
-- `examples/example_preset_tilt_ascending.json`: example GUI preset
 - `docs/GUI.md`: illustrated GUI guide
 - `docs/prepare_warp_tiltseries.md`: preparation-engine reference
 - `docs/warp_commands.md`: downstream Warp command templates
