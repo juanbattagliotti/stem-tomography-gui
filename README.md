@@ -8,32 +8,26 @@ previews image-to-angle assignments, and extracts tilt-angle lists. It supports
 the computational preparation of plastic-section HAADF-STEM data without
 requiring a change to the detector configuration.
 
-**Scope:** this GUI prepares inputs. Reconstruction, denoising and segmentation
-are performed separately in Warp, IMOD and other downstream tools; those tools
-are not bundled or run by this application.
+> [!IMPORTANT]  
+> This GUI prepares inputs. Reconstruction, denoising and segmentation are performed
+> separately in Warp, IMOD and other downstream tools. Those tools
+> are not bundled or run by this application.
 
 ## Install and launch
 
-Download and extract the repository, then open a terminal in its directory.
-Install a Conda distribution first if Conda is not already available.
+Clone this repository:
 
 ```bash
-conda env create -f environment_prepare_warp.yml
-conda activate warp-tilt-prep-new
-python tiltseries_protocol_gui.py
+git clone https://github.com/nobias-fht/stem-tomography-gui.git
+mdkir stem-tomography-gui
 ```
 
-On macOS or Linux, the supplied launcher can also be used after creating the
-environment:
+Run the interface with `uv` (see [uv installation guidelines](https://docs.astral.sh/uv/getting-started/installation/)):
 
 ```bash
-bash launch_gui.sh
+uv run stem-tomography-gui
 ```
 
-The environment includes Python 3.11, NumPy, Pillow and Tkinter, together with
-optional notebook tools retained from the supplied bundle. A graphical desktop
-is needed for the GUI. The command-line tools do not require a display or GPU.
-The environment specifies dependencies, not a fully pinned reproducibility lock.
 
 ## Prepare a dataset
 
